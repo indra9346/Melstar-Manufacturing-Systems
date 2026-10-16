@@ -2,13 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Melstar Manufacturing Systems</title>
-  <meta name="description" content="Melstar Manufacturing Systems Pvt Ltd — precision manufacturing from KIADB Industrial Area, Obadenahalli, Doddaballapura, Karnataka." />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Melstar Manufacturing Systems Pvt Ltd · Precision Engineering since 2011</title>
+  <meta name="description" content="Melstar Manufacturing Systems Private Limited (CIN U29309KA2011PTC060656), incorporated 2011 in Bengaluru, delivers precision-engineered components and sub-assemblies through CNC machining, fabrication and customised industrial design from KIADB Industrial Area, Doddaballapura, Karnataka." />
+  <meta name="theme-color" content="#f4f7ff" />
+  <meta property="og:title" content="Melstar Manufacturing Systems Pvt Ltd" />
+  <meta property="og:description" content="Precision-engineered components and sub-assemblies for industry · CNC machining · Fabrication · Industrial design · Since 2011." />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=7" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2306b6d4'/%3E%3Cstop offset='1' stop-color='%236366f1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M32 4l24 14v28L32 60 8 46V18z'/%3E%3Cpath fill='%23fff' d='M20 42V22l12 10 12-10v20h-5V32l-7 6-7-6v10z'/%3E%3C/svg%3E" />
   <script type="importmap">
     { "imports": {
@@ -16,15 +21,53 @@
       "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
     } }
   </script>
+  <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" crossorigin />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Melstar Manufacturing Systems",
+    "legalName": "Melstar Manufacturing Systems Private Limited",
+    "foundingDate": "2011-10-04",
+    "identifier": { "@type": "PropertyValue", "propertyID": "CIN", "value": "U29309KA2011PTC060656" },
+    "description": "Precision-engineered components and sub-assemblies for the industrial sector through CNC machining, fabrication and customised industrial design.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1197, 6th Main Road, A Block, 2nd Stage, Rajajinagar",
+      "addressLocality": "Bengaluru",
+      "addressRegion": "Karnataka",
+      "postalCode": "560010",
+      "addressCountry": "IN"
+    },
+    "location": {
+      "@type": "Place",
+      "name": "Melstar plant, KIADB Industrial Area Obadenahalli",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Plot No. 15, Road No. 3, KIADB Industrial Area Obadenahalli, Phase 3",
+        "addressLocality": "Doddaballapura",
+        "addressRegion": "Karnataka",
+        "postalCode": "562163",
+        "addressCountry": "IN"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": 13.27, "longitude": 77.58 }
+    },
+    "member": [
+      { "@type": "Person", "name": "Sriranga Raghu", "jobTitle": "Director" },
+      { "@type": "Person", "name": "Sriram Dhati Raghu", "jobTitle": "Whole-time Director" },
+      { "@type": "Person", "name": "Dhati Raghu Srikar", "jobTitle": "Whole-time Director" }
+    ]
+  }
+  </script>
 </head>
 <body>
-  <div class="loader" id="loader">
+  <div class="loader" id="loader" aria-hidden="true">
     <div class="loader-hex"><span></span></div>
-    <p>Calibrating systems<span class="dots"></span></p>
+    <p>Melstar<span class="dots"></span></p>
   </div>
 
-  <div class="cursor-glow" id="cursorGlow"></div>
-  <div class="progress" id="progress"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
   <div class="bg-aurora" aria-hidden="true">
     <i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>
@@ -32,7 +75,7 @@
   </div>
 
   <header class="nav" id="nav">
-    <a href="#top" class="brand">
+    <a href="#top" class="brand" aria-label="Melstar Manufacturing Systems — home">
       <svg viewBox="0 0 64 64" class="brand-mark" aria-hidden="true">
         <defs><linearGradient id="bm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#06b6d4"/><stop offset="1" stop-color="#6366f1"/></linearGradient></defs>
         <path fill="url(#bm)" d="M32 4l24 14v28L32 60 8 46V18z"/>
@@ -40,28 +83,30 @@
       </svg>
       <span>Melstar<em>Manufacturing Systems</em></span>
     </a>
-    <nav class="links" id="links">
+    <nav class="links" id="links" aria-label="Primary">
       <a href="#about">About</a>
       <a href="#capabilities">Capabilities</a>
       <a href="#process">Process</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#company">Company</a>
       <a href="#live">Live Floor</a>
       <a href="#contact" class="btn btn-sm magnetic">Contact</a>
     </nav>
-    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="links"><span></span><span></span></button>
   </header>
 
   <main id="top">
     <!-- HERO -->
     <section class="hero">
-      <canvas id="hero3d" aria-hidden="true"></canvas>
+      <div class="hero-visual" id="heroVisual" aria-hidden="true"><canvas id="hero3d"></canvas></div>
       <div class="hero-copy">
-        <p class="eyebrow reveal"><span class="pulse"></span> KIADB Industrial Area · Doddaballapura</p>
+        <p class="eyebrow reveal"><span class="pulse"></span> Since 2011 · KIADB Doddaballapura, Karnataka</p>
         <h1 class="hero-title">
           <span class="line"><span>Precision</span></span>
           <span class="line"><span class="grad">engineered.</span></span>
           <span class="line"><span>Future built.</span></span>
         </h1>
-        <p class="hero-sub reveal">Melstar Manufacturing Systems turns engineering intent into flawless, repeatable production — with the rigour of precision tooling and the intelligence of connected systems.</p>
+        <p class="hero-sub reveal">Precision-engineered components and sub-assemblies for the industrial sector — delivered through CNC machining, fabrication and customised industrial design.</p>
         <div class="hero-cta reveal">
           <a href="#capabilities" class="btn magnetic">Explore capabilities <span class="arrow">→</span></a>
           <a href="#contact" class="btn btn-ghost magnetic">Visit the plant</a>
@@ -74,19 +119,19 @@
           <span class="hud-meta" id="heroClock">IST --:--:--</span>
         </div>
         <div class="hud-card glass">
-          <span class="hud-label">Coordinates</span>
-          <strong>13.27° N · 77.58° E</strong>
-          <span class="hud-meta">Plus code 7HFG+CR</span>
+          <span class="hud-label">Established</span>
+          <strong>04 Oct 2011</strong>
+          <span class="hud-meta"><span data-age>15</span> years · RoC Bangalore</span>
         </div>
       </div>
-      <a href="#about" class="scroll-cue" aria-label="Scroll"><span></span></a>
+      <a href="#about" class="scroll-cue" aria-label="Scroll to About"><span></span></a>
     </section>
 
     <!-- MARQUEE -->
     <div class="marquee" aria-hidden="true">
       <div class="track">
-        <span>Precision Machining</span><b>✦</b><span>Fabrication</span><b>✦</b><span>Assembly</span><b>✦</b><span>Quality Assurance</span><b>✦</b><span>Automation</span><b>✦</b><span>Custom Engineering</span><b>✦</b>
-        <span>Precision Machining</span><b>✦</b><span>Fabrication</span><b>✦</b><span>Assembly</span><b>✦</b><span>Quality Assurance</span><b>✦</b><span>Automation</span><b>✦</b><span>Custom Engineering</span><b>✦</b>
+        <span>CNC Machining</span><b>✦</b><span>Heavy Machinery</span><b>✦</b><span>Fabrication</span><b>✦</b><span>Manufacturing Technology</span><b>✦</b><span>Sub-assemblies</span><b>✦</b><span>Specialized Engineering</span><b>✦</b><span>Industrial Design</span><b>✦</b>
+        <span>CNC Machining</span><b>✦</b><span>Heavy Machinery</span><b>✦</b><span>Fabrication</span><b>✦</b><span>Manufacturing Technology</span><b>✦</b><span>Sub-assemblies</span><b>✦</b><span>Specialized Engineering</span><b>✦</b><span>Industrial Design</span><b>✦</b>
       </div>
     </div>
 
@@ -96,12 +141,14 @@
         <div class="about-text">
           <p class="kicker reveal">01 — Who we are</p>
           <h2 class="reveal">A manufacturing partner built on <span class="grad">systems thinking</span>.</h2>
-          <p class="reveal">From our facility at Plot No. 15, KIADB Industrial Area, Obadenahalli, we bring together skilled people, disciplined processes and modern equipment. Every part we deliver is the output of a system — measured, traceable and designed to repeat.</p>
+          <p class="reveal">Incorporated in Bengaluru on 4 October 2011, Melstar Manufacturing Systems Private Limited has spent <span data-age>15</span> years solving complex manufacturing challenges for industry. We supply precision-engineered components and sub-assemblies, built through CNC machining, fabrication and customised industrial design.</p>
+          <p class="reveal">Our registered office is in Rajajinagar, Bengaluru. Production runs from Plot No. 15, KIADB Industrial Area, Obadenahalli, Doddaballapura, where people, process and equipment work as one measured, repeatable system.</p>
           <ul class="pill-list reveal">
-            <li>Process-driven production</li>
-            <li>Traceable quality</li>
-            <li>Engineering collaboration</li>
-            <li>On-time delivery focus</li>
+            <li>Precision components</li>
+            <li>Sub-assemblies</li>
+            <li>CNC machining</li>
+            <li>Fabrication</li>
+            <li>Industrial design</li>
           </ul>
         </div>
         <div class="about-visual reveal">
@@ -111,96 +158,196 @@
             <div class="ring r2"><i></i></div>
             <div class="ring r3"><i></i></div>
             <span class="tag t1 glass">Design</span>
-            <span class="tag t2 glass">Build</span>
-            <span class="tag t3 glass">Verify</span>
+            <span class="tag t2 glass">Machine</span>
+            <span class="tag t3 glass">Assemble</span>
           </div>
         </div>
       </div>
       <div class="stats">
-        <div class="stat glass reveal"><strong data-count="6" data-suffix="">0</strong><span>Core capability lines</span></div>
-        <div class="stat glass reveal"><strong data-count="5" data-suffix="-stage">0</strong><span>Controlled production flow</span></div>
-        <div class="stat glass reveal"><strong data-count="100" data-suffix="%">0</strong><span>Parts traceable to process</span></div>
-        <div class="stat glass reveal"><strong data-count="3" data-suffix="">0</strong><span>Phase KIADB industrial hub</span></div>
+        <div class="stat glass reveal"><strong data-count="2011" data-from="1990">2011</strong><span>Year of incorporation</span></div>
+        <div class="stat glass reveal"><strong data-count="15" data-age-count data-suffix="+">15+</strong><span>Years in precision manufacturing</span></div>
+        <div class="stat glass reveal"><strong data-count="3">3</strong><span>Industry sectors served</span></div>
+        <div class="stat glass reveal"><strong data-count="2">2</strong><span>Locations · Bengaluru &amp; Doddaballapura</span></div>
       </div>
     </section>
 
     <!-- CAPABILITIES -->
     <section class="section" id="capabilities">
-      <p class="kicker reveal">02 — Capabilities</p>
+      <p class="kicker reveal center">02 — Capabilities</p>
       <h2 class="reveal center">What we <span class="grad">engineer</span></h2>
+      <p class="reveal center sub">Six capabilities. Each part is engineered to drawing, built to specification and checked before it leaves the plant.</p>
       <div class="cards">
         <article class="card tilt reveal">
-          <div class="card-icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="9"/><path d="M24 4v8M24 36v8M4 24h8M36 24h8M10 10l6 6M32 32l6 6M38 10l-6 6M16 32l-6 6"/></svg></div>
-          <h3>Precision Machining</h3>
+          <div class="card-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="9"/><path d="M24 4v8M24 36v8M4 24h8M36 24h8M10 10l6 6M32 32l6 6M38 10l-6 6M16 32l-6 6"/></svg></div>
+          <h3>CNC Machining</h3>
           <p>CNC turning and milling to tight tolerances, from prototype quantities to steady production runs.</p>
           <span class="card-shine"></span>
         </article>
         <article class="card tilt reveal">
-          <div class="card-icon"><svg viewBox="0 0 48 48"><path d="M6 34l18-24 18 24z"/><path d="M14 34v8h20v-8"/></svg></div>
-          <h3>Sheet Metal &amp; Fabrication</h3>
-          <p>Cutting, bending, welding and finishing for enclosures, brackets, frames and structural parts.</p>
+          <div class="card-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 34l18-24 18 24z"/><path d="M14 34v8h20v-8"/></svg></div>
+          <h3>Fabrication</h3>
+          <p>Cutting, bending, welding and finishing for frames, brackets, enclosures and structural parts.</p>
           <span class="card-shine"></span>
         </article>
         <article class="card tilt reveal">
-          <div class="card-icon"><svg viewBox="0 0 48 48"><rect x="6" y="14" width="16" height="16" rx="3"/><rect x="26" y="18" width="16" height="16" rx="3"/><path d="M22 22h4M14 30v8M34 34v6"/></svg></div>
-          <h3>Assembly &amp; Integration</h3>
-          <p>Sub-assemblies and complete systems built to documented work instructions and tested before dispatch.</p>
+          <div class="card-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5l17 10v18L24 43 7 33V15z"/><path d="M7 15l17 10 17-10M24 25v18"/></svg></div>
+          <h3>Precision Components</h3>
+          <p>Precision-engineered parts for industrial equipment, made to drawing and repeatable from batch to batch.</p>
           <span class="card-shine"></span>
         </article>
         <article class="card tilt reveal">
-          <div class="card-icon"><svg viewBox="0 0 48 48"><circle cx="21" cy="21" r="12"/><path d="M30 30l12 12M15 21l4 4 8-8"/></svg></div>
+          <div class="card-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="14" width="16" height="16" rx="3"/><rect x="26" y="18" width="16" height="16" rx="3"/><path d="M22 22h4M14 30v8M34 34v6"/></svg></div>
+          <h3>Sub-assemblies</h3>
+          <p>Components integrated into ready-to-fit sub-assemblies, built to documented work instructions and tested before dispatch.</p>
+          <span class="card-shine"></span>
+        </article>
+        <article class="card tilt reveal">
+          <div class="card-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 38l8-8M30 10l8 8-16 16-8-8z"/><path d="M26 14l8 8"/></svg></div>
+          <h3>Customised Industrial Design</h3>
+          <p>Design-for-manufacture reviews and custom design support that turn your requirement into a production-ready part.</p>
+          <span class="card-shine"></span>
+        </article>
+        <article class="card tilt reveal">
+          <div class="card-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="21" cy="21" r="12"/><path d="M30 30l12 12M15 21l4 4 8-8"/></svg></div>
           <h3>Quality Inspection</h3>
-          <p>In-process and final inspection with calibrated gauges, recorded results and full lot traceability.</p>
+          <p>In-process and final inspection with calibrated gauges, recorded results and lot traceability.</p>
           <span class="card-shine"></span>
         </article>
-        <article class="card tilt reveal">
-          <div class="card-icon"><svg viewBox="0 0 48 48"><path d="M8 40h32M14 40V24l10-8 10 8v16"/><circle cx="24" cy="28" r="4"/><path d="M24 8v8"/></svg></div>
-          <h3>Automation Systems</h3>
-          <p>Fixtures, jigs and automated stations that raise throughput and remove variation from repetitive work.</p>
-          <span class="card-shine"></span>
-        </article>
-        <article class="card tilt reveal">
-          <div class="card-icon"><svg viewBox="0 0 48 48"><path d="M10 38l8-8M30 10l8 8-16 16-8-8z"/><path d="M26 14l8 8"/></svg></div>
-          <h3>Custom Engineering</h3>
-          <p>Design-for-manufacture reviews and build-to-print support that take your drawing to a production-ready part.</p>
-          <span class="card-shine"></span>
-        </article>
+      </div>
+
+      <div class="sectors">
+        <p class="sectors-label reveal">Industries we serve</p>
+        <div class="sector-grid">
+          <div class="sector glass reveal">
+            <span class="sector-ic"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 40h36M10 40V22h10v18M20 28h10l4-12h6v24"/><circle cx="15" cy="16" r="4"/></svg></span>
+            <div><h4>Heavy Machinery</h4><p>Robust machined and fabricated parts for heavy equipment.</p></div>
+          </div>
+          <div class="sector glass reveal">
+            <span class="sector-ic"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="10" width="32" height="22" rx="3"/><path d="M16 40h16M24 32v8M15 22l5-5 5 5 8-8"/></svg></span>
+            <div><h4>Manufacturing Technology</h4><p>Components and sub-assemblies for production systems.</p></div>
+          </div>
+          <div class="sector glass reveal">
+            <span class="sector-ic"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="7"/><path d="M24 6v6M24 36v6M6 24h6M36 24h6M11 11l4 4M33 33l4 4M37 11l-4 4M15 33l-4 4"/></svg></span>
+            <div><h4>Specialized Engineering</h4><p>Custom-designed parts where standard solutions fall short.</p></div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- PROCESS -->
     <section class="section process" id="process">
-      <p class="kicker reveal">03 — Process</p>
+      <p class="kicker reveal center">03 — Process</p>
       <h2 class="reveal center">From drawing to <span class="grad">dispatch</span></h2>
       <div class="timeline" id="timeline">
         <svg class="timeline-line" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true">
           <defs><linearGradient id="tl" x1="0" x2="1"><stop offset="0" stop-color="#06b6d4"/><stop offset=".5" stop-color="#6366f1"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>
           <path id="tlPath" d="M0 60 C 150 0, 250 120, 400 60 S 650 0, 800 60 S 950 110, 1000 60" />
         </svg>
-        <div class="steps">
-          <div class="step reveal"><span class="num">01</span><h4>Review</h4><p>Drawings, tolerances and volumes analysed for manufacturability.</p></div>
-          <div class="step reveal"><span class="num">02</span><h4>Prototype</h4><p>First articles produced and validated against specification.</p></div>
-          <div class="step reveal"><span class="num">03</span><h4>Produce</h4><p>Controlled runs with standard work and in-process checks.</p></div>
-          <div class="step reveal"><span class="num">04</span><h4>Inspect</h4><p>Final inspection, documentation and lot traceability.</p></div>
-          <div class="step reveal"><span class="num">05</span><h4>Deliver</h4><p>Protective packing and scheduled dispatch to your line.</p></div>
+        <ol class="steps">
+          <li class="step reveal"><span class="num">01</span><h4>Review</h4><p>Drawings, tolerances and volumes analysed for manufacturability.</p></li>
+          <li class="step reveal"><span class="num">02</span><h4>Prototype</h4><p>First articles produced and validated against specification.</p></li>
+          <li class="step reveal"><span class="num">03</span><h4>Produce</h4><p>Controlled CNC and fabrication runs with in-process checks.</p></li>
+          <li class="step reveal"><span class="num">04</span><h4>Inspect</h4><p>Final inspection, documentation and lot traceability.</p></li>
+          <li class="step reveal"><span class="num">05</span><h4>Deliver</h4><p>Protective packing and scheduled dispatch to your line.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- LEADERSHIP -->
+    <section class="section" id="leadership">
+      <p class="kicker reveal center">04 — Leadership</p>
+      <h2 class="reveal center">The board behind <span class="grad">Melstar</span></h2>
+      <p class="reveal center sub">Three active directors guide the company, as registered with the Registrar of Companies, Bangalore.</p>
+      <div class="board">
+        <article class="person glass reveal">
+          <div class="avatar"><span>SR</span></div>
+          <h3>Sriranga Raghu</h3>
+          <span class="role">Director</span>
+          <dl class="person-meta">
+            <div><dt>On the board since</dt><dd>31 Dec 2020</dd></div>
+            <div><dt>DIN</dt><dd class="mono">02146175</dd></div>
+          </dl>
+          <div class="also">
+            <span>Also on the boards of</span>
+            <ul>
+              <li>Macurex Sensors Pvt Ltd</li>
+              <li>M Acer Automotive Systems Pvt Ltd</li>
+            </ul>
+          </div>
+        </article>
+        <article class="person glass reveal">
+          <div class="avatar"><span>SD</span></div>
+          <h3>Sriram Dhati Raghu</h3>
+          <span class="role">Whole-time Director</span>
+          <dl class="person-meta">
+            <div><dt>On the board since</dt><dd>01 Apr 2024</dd></div>
+            <div><dt>DIN</dt><dd class="mono">08763716</dd></div>
+          </dl>
+        </article>
+        <article class="person glass reveal">
+          <div class="avatar"><span>DS</span></div>
+          <h3>Dhati Raghu Srikar</h3>
+          <span class="role">Whole-time Director</span>
+          <dl class="person-meta">
+            <div><dt>On the board since</dt><dd>01 Apr 2024</dd></div>
+            <div><dt>DIN</dt><dd class="mono">03623554</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <!-- COMPANY PROFILE -->
+    <section class="section" id="company">
+      <p class="kicker reveal center">05 — Company profile</p>
+      <h2 class="reveal center">Registered, active &amp; <span class="grad">accountable</span></h2>
+      <div class="profile-grid">
+        <div class="facts glass reveal">
+          <div class="facts-head">
+            <span class="badge-active"><i></i> Active</span>
+            <span class="facts-title">Corporate information</span>
+          </div>
+          <dl>
+            <div class="fact wide"><dt>Legal name</dt><dd>Melstar Manufacturing Systems Private Limited</dd></div>
+            <div class="fact wide"><dt>CIN</dt><dd><span class="mono" id="cin">U29309KA2011PTC060656</span> <button class="copy" id="copyCin" type="button" aria-label="Copy CIN">Copy</button></dd></div>
+            <div class="fact"><dt>Incorporated</dt><dd>04 October 2011</dd></div>
+            <div class="fact"><dt>Company age</dt><dd><span data-age>15</span> years</dd></div>
+            <div class="fact"><dt>Company type</dt><dd>Private company limited by shares</dd></div>
+            <div class="fact"><dt>Sub-category</dt><dd>Non-government company</dd></div>
+            <div class="fact"><dt>Origin · Listing</dt><dd>Indian · Unlisted</dd></div>
+            <div class="fact"><dt>Registrar</dt><dd>RoC Bangalore, Karnataka</dd></div>
+            <div class="fact"><dt>Authorised capital</dt><dd>₹1 Crore</dd></div>
+            <div class="fact"><dt>Paid-up capital</dt><dd>₹1 Crore <small>· fully subscribed</small></dd></div>
+            <div class="fact"><dt>Board</dt><dd>3 active directors</dd></div>
+            <div class="fact"><dt>Sectors</dt><dd>Heavy Machinery, Manufacturing Technology, Specialized Engineering</dd></div>
+            <div class="fact wide"><dt>Registered office</dt><dd>1197, 6th Main Road, A Block, 2nd Stage, Rajajinagar, Bengaluru, Karnataka 560010</dd></div>
+          </dl>
+        </div>
+        <div class="journey glass reveal">
+          <p class="facts-title">Our journey</p>
+          <ol class="milestones">
+            <li><span class="m-year">2011</span><div><b>Incorporated in Bengaluru</b><p>04 Oct 2011 — registered with RoC Bangalore as a private limited company.</p></div></li>
+            <li><span class="m-year">2020</span><div><b>Board strengthened</b><p>31 Dec 2020 — Sriranga Raghu joins as Director.</p></div></li>
+            <li><span class="m-year">2024</span><div><b>Whole-time directors appointed</b><p>01 Apr 2024 — Sriram Dhati Raghu and Dhati Raghu Srikar take on full-time leadership.</p></div></li>
+            <li class="now"><span class="m-year" id="nowYear">2026</span><div><b><span data-age>15</span> years of precision</b><p>Components and sub-assemblies from our KIADB Doddaballapura plant.</p></div></li>
+          </ol>
         </div>
       </div>
     </section>
 
     <!-- LIVE -->
     <section class="section live" id="live">
-      <p class="kicker reveal">04 — Live floor</p>
+      <p class="kicker reveal center">06 — Live floor</p>
       <h2 class="reveal center">The plant, <span class="grad">in real time</span></h2>
-      <p class="reveal center sub">A live view of our smart-factory vision — the clock and plant status are real; the machine telemetry is a visual simulation.</p>
+      <p class="reveal center sub">The clock and plant status are real (IST). The machine telemetry below is a visual simulation of our smart-factory vision.</p>
       <div class="dash">
         <div class="panel glass reveal span-2">
-          <div class="panel-head"><span>Line throughput</span><span class="live-dot">LIVE</span></div>
-          <canvas id="chart" height="220"></canvas>
+          <div class="panel-head"><span>Line throughput</span><span class="live-dot">SIMULATED</span></div>
+          <canvas id="chart"></canvas>
         </div>
         <div class="panel glass reveal">
           <div class="panel-head"><span>Overall efficiency</span></div>
           <div class="gauge">
-            <svg viewBox="0 0 200 120">
+            <svg viewBox="0 0 200 120" aria-hidden="true">
               <defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#06b6d4"/><stop offset="1" stop-color="#6366f1"/></linearGradient></defs>
               <path class="g-bg" d="M20 110 A80 80 0 0 1 180 110"/>
               <path class="g-val" id="gaugeArc" d="M20 110 A80 80 0 0 1 180 110"/>
@@ -224,17 +371,21 @@
     <section class="section contact" id="contact">
       <div class="contact-grid">
         <div>
-          <p class="kicker reveal">05 — Visit us</p>
+          <p class="kicker reveal">07 — Visit us</p>
           <h2 class="reveal">Let’s build something <span class="grad">precise</span>.</h2>
           <div class="info glass reveal">
-            <div class="info-row"><span class="ic">⌖</span><div><b>Address</b><p>Plot No. 15, Road No. 3, KIADB Industrial Area Obadenahalli, Phase 3, Doddaballapura, Karnataka 562163</p></div></div>
-            <div class="info-row"><span class="ic">◷</span><div><b>Hours</b><p>Closes 5:00 PM · see live status above</p></div></div>
-            <div class="info-row"><span class="ic">✣</span><div><b>Plus code</b><p>7HFG+CR Doddaballapura</p></div></div>
+            <div class="info-row"><span class="ic">⌖</span><div><b>Plant</b><p>Plot No. 15, Road No. 3, KIADB Industrial Area Obadenahalli, Phase 3, Doddaballapura, Karnataka 562163</p></div></div>
+            <div class="info-row"><span class="ic">⌂</span><div><b>Registered office</b><p>1197, 6th Main Road, A Block, 2nd Stage, Rajajinagar, Bengaluru, Karnataka 560010</p></div></div>
+            <div class="info-row"><span class="ic">◷</span><div><b>Hours</b><p>Closes 5:00 PM · <span id="contactStatus">see live status</span></p></div></div>
+            <div class="info-row"><span class="ic">✣</span><div><b>Plus code</b><p>7HFG+CR Doddaballapura · 13.27° N, 77.58° E</p></div></div>
           </div>
-          <a class="btn magnetic reveal" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Melstar+Manufacturing+Systems+Pvt+Ltd+Doddaballapura">Get directions <span class="arrow">→</span></a>
+          <div class="contact-cta reveal">
+            <a class="btn magnetic" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Melstar+Manufacturing+Systems+Pvt+Ltd+Doddaballapura">Directions to plant <span class="arrow">→</span></a>
+            <a class="btn btn-ghost magnetic" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=1197+6th+Main+Road+A+Block+2nd+Stage+Rajajinagar+Bengaluru+560010">Registered office</a>
+          </div>
         </div>
         <div class="map-wrap glass reveal">
-          <iframe title="Melstar location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          <iframe title="Melstar plant location, KIADB Obadenahalli, Doddaballapura" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
             src="https://www.google.com/maps?q=Melstar+Manufacturing+Systems+Pvt+Ltd,+KIADB+Industrial+Area+Obadenahalli,+Doddaballapura&output=embed"></iframe>
           <div class="map-scan"></div>
         </div>
@@ -244,13 +395,39 @@
 
   <footer class="footer">
     <div class="foot-inner">
-      <span>© <span id="year"></span> Melstar Manufacturing Systems Pvt Ltd</span>
-      <span class="kn">ಮೇಲ್ಸ್ಟರ್ ಮ್ಯಾನುಫ್ಯಾಕ್ಚರಿಂಗ್ ಸಿಸ್ಟಮ್ಸ್ ಪಿವಿಟಿ ಎಲ್‌ಟಿಡಿ</span>
-      <a href="#top">Back to top ↑</a>
+      <div class="foot-brand">
+        <b>Melstar Manufacturing Systems Private Limited</b>
+        <span>CIN <span class="mono">U29309KA2011PTC060656</span> · RoC Bangalore</span>
+        <span>Regd. office: 1197, 6th Main Road, A Block, 2nd Stage, Rajajinagar, Bengaluru 560010</span>
+        <span class="kn">ಮೇಲ್ಸ್ಟರ್ ಮ್ಯಾನುಫ್ಯಾಕ್ಚರಿಂಗ್ ಸಿಸ್ಟಮ್ಸ್ ಪಿವಿಟಿ ಎಲ್‌ಟಿಡಿ</span>
+      </div>
+      <div class="foot-links">
+        <a href="#capabilities">Capabilities</a>
+        <a href="#leadership">Leadership</a>
+        <a href="#company">Company</a>
+        <a href="#contact">Contact</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-copy">© <span id="year"></span> Melstar Manufacturing Systems Pvt Ltd. All rights reserved.</p>
+      <p class="credit">
+        <span class="credit-text">Designed &amp; Developed with</span>
+        <svg class="heart" viewBox="0 0 24 24" role="img" aria-label="love">
+          <defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5a7a"/><stop offset="1" stop-color="#e0112b"/></linearGradient></defs>
+          <path fill="url(#hg)" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <span class="credit-text">by</span>
+        <a class="swan-badge" href="https://swandigitalsolutions.com" target="_blank" rel="noopener" aria-label="Swan Digital Solutions — opens in a new tab">
+          <img src="assets/swan-logo.png" width="15" height="25" alt="" loading="lazy" decoding="async" />
+          <span class="swan-name">Swan Digital <em>Solutions</em></span>
+          <svg class="swan-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg>
+        </a>
+      </p>
     </div>
   </footer>
 
-  <script src="main.js"></script>
-  <script type="module" src="hero3d.js"></script>
+  <script src="main.js?v=7" defer></script>
+  <script type="module" src="hero3d.js?v=7"></script>
 </body>
 </html>
