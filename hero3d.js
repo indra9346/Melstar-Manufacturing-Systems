@@ -4,12 +4,18 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 const canvas = document.getElementById('hero3d');
 const holder = document.getElementById('heroVisual');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const stacked = matchMedia('(max-width: 900px)');
+// Must match the CSS layouts where the 3D block sits in its own box (stacked phone / landscape phone).
+const stacked = matchMedia('(max-width: 900px), (orientation: landscape) and (max-height: 520px)');
+const coarse = matchMedia('(pointer: coarse)').matches;
 // Phones/tablets and low-core machines get a lighter material + geometry tier.
-const lite = matchMedia('(pointer: coarse)').matches || stacked.matches || (navigator.hardwareConcurrency || 8) <= 4;
+const lite = coarse || stacked.matches || (navigator.hardwareConcurrency || 8) <= 4;
 
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: !lite, alpha: true, powerPreference: 'high-performance' });
-let maxDpr = Math.min(devicePixelRatio || 1, lite ? 1.5 : 2);
+// Let the page paint, reveal its copy and become scrollable before the heavy WebGL setup
+// (renderer, environment map, shader compile) takes the main thread.
+await new Promise(r => setTimeout(() => ('requestIdleCallback' in window ? requestIdleCallback(r, { timeout: 1200 }) : r()), 350));
+
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: !lite, alpha: true, powerPreference: lite ? 'low-power' : 'high-performance' });
+let maxDpr = Math.min(devicePixelRatio || 1, lite ? 1.25 : 2);
 renderer.setPixelRatio(maxDpr);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.35;
@@ -144,8 +150,8 @@ function resize() {
     baseY = 1.15 * baseScale;
   } else {
     // Keep the train in the right half so it never sits behind the copy.
-    baseScale = Math.min(0.9, viewW / 14.5);
-    baseX = viewW * 0.3;
+    baseScale = Math.min(0.9, viewW / 16);   // ~0.88 at 16:10, ~0.72 at 4:3 tablets
+    baseX = viewW * 0.31;
     baseY = 0;
   }
   if (!running) renderOnce();
@@ -156,9 +162,17 @@ else addEventListener('resize', resize);
 let mx = 0, my = 0, sx = 0, sy = 0;
 if (!lite) addEventListener('pointermove', e => { mx = e.clientX / innerWidth - 0.5; my = e.clientY / innerHeight - 0.5; }, { passive: true });
 
-/* ---------- Render loop: runs only while visible & tab active ---------- */
+/* ---------- Render loop: runs only while visible, tab active and (on touch) not mid-scroll ---------- */
 let intro = reduced ? 1 : 0, t = 0, last = 0, raf = 0, running = false, visible = true, shown = false;
-let frames = 0, slowAcc = 0;
+const MIN_FRAME = lite ? 32 : 0;            // lite devices: ~30 fps is plenty for slow-turning gears
+const TARGET = lite ? 33.4 : 16.7;          // expected ms between drawn frames
+let lastDraw = 0, frames = 0, slowAcc = 0;
+let touchScrolling = false, scrollIdle = 0;
+if (coarse) addEventListener('scroll', () => {
+  // Give the GPU to the compositor while the finger / momentum scroll is moving.
+  touchScrolling = true; clearTimeout(scrollIdle);
+  scrollIdle = setTimeout(() => { touchScrolling = false; last = 0; }, 140);
+}, { passive: true });
 
 function update(dt) {
   t += dt;
@@ -187,19 +201,25 @@ function update(dt) {
 
 function renderOnce() {
   renderer.render(scene, camera);
-  if (!shown) { shown = true; holder.classList.add('on'); }
+  if (!shown) { shown = true; holder.classList.remove('off'); holder.classList.add('on'); }
 }
 
 function frame(now) {
   raf = requestAnimationFrame(frame);
-  const dt = last ? Math.min((now - last) / 1000, 0.05) : 0.016;
+  if (touchScrolling) return;
+  if (now - lastDraw < MIN_FRAME) return;
+  lastDraw = now;
+  const gap = last ? now - last : TARGET;
+  const dt = Math.min(gap / 1000, 0.05);
   last = now;
-  // Adaptive quality: if the first ~2 s average below ~40 fps, drop the pixel ratio.
-  if (frames < 120) {
-    frames++; slowAcc += dt;
-    if (frames === 120 && slowAcc / 120 > 0.025 && maxDpr > 1) {
-      maxDpr = 1; renderer.setPixelRatio(1); resize();
+  // Adaptive quality, re-checked continuously: if drawn frames come >40% slower than the target,
+  // step the pixel ratio down (to a floor of 0.75).
+  frames++; slowAcc += gap;
+  if (frames === 90) {
+    if (slowAcc / frames > TARGET * 1.4 && maxDpr > 0.75) {
+      maxDpr = Math.max(0.75, maxDpr - 0.25); renderer.setPixelRatio(maxDpr); resize();
     }
+    frames = 0; slowAcc = 0;
   }
   update(dt);
   renderOnce();
@@ -211,10 +231,15 @@ function setRunning(on) {
   else if (!on && running) { running = false; cancelAnimationFrame(raf); }
 }
 
-new IntersectionObserver(([e]) => { visible = e.isIntersecting; setRunning(visible && !document.hidden); }).observe(canvas);
+// Stop once the block is mostly off screen (not just when the last pixel leaves).
+new IntersectionObserver(entries => {
+  visible = entries[entries.length - 1].intersectionRatio > 0.15;
+  setRunning(visible && !document.hidden);
+}, { threshold: [0, 0.15, 0.3] }).observe(canvas);
 document.addEventListener('visibilitychange', () => setRunning(visible && !document.hidden));
 
 resize();
 update(0);
+if (renderer.compileAsync) { try { await renderer.compileAsync(scene, camera); } catch { /* fall back to sync compile */ } }
 renderOnce();
-setRunning(true);
+setRunning(visible && !document.hidden);

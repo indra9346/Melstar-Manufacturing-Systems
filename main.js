@@ -3,7 +3,16 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const coarse = matchMedia('(pointer: coarse)').matches;
   const wide = matchMedia('(min-width: 1001px)');
+  const cssProgress = CSS.supports && CSS.supports('animation-timeline: scroll()');
+
+  // Touch-scroll flag shared by the canvas loops: skip drawing while the finger/momentum is moving.
+  let touchScrolling = false, scrollIdle = 0;
+  if (coarse) addEventListener('scroll', () => {
+    touchScrolling = true; clearTimeout(scrollIdle);
+    scrollIdle = setTimeout(() => { touchScrolling = false; }, 140);
+  }, { passive: true });
 
   /* ---------- Company facts (registry: incorporated 04 Oct 2011) ---------- */
   const now = new Date();
@@ -15,12 +24,14 @@
   $('#nowYear').textContent = now.getFullYear();
 
   /* ---------- Loader: release as soon as fonts are in (never wait on 3D / map / CDN) ---------- */
-  document.body.classList.add('loading');
+  const root = document.documentElement, loader = $('#loader');
+  root.classList.add('loading');
   let loaded = false;
   const finishLoad = () => {
     if (loaded) return; loaded = true;
-    $('#loader').classList.add('done');
-    document.body.classList.remove('loading');
+    loader.classList.add('done');
+    setTimeout(() => loader.remove(), 700); // stop its animations & hit-testing for good
+    root.classList.remove('loading');
     document.body.classList.add('ready');
     $$('.hero .reveal').forEach((el, i) => setTimeout(() => el.classList.add('in'), 150 + i * 110));
   };
@@ -35,7 +46,7 @@
     ticking = false;
     const y = scrollY;
     nav.classList.toggle('scrolled', y > 30);
-    progress.style.transform = `scaleX(${Math.min(y / maxScroll, 1)})`;
+    if (!cssProgress) progress.style.transform = `scaleX(${Math.min(y / maxScroll, 1)})`;
     if (wide.matches) drawTimeline();
   };
   const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
@@ -78,7 +89,9 @@
       if (el.classList.contains('card')) setTimeout(() => el.classList.add('settled'), 900 + (parseFloat(el.style.getPropertyValue('--d')) || 0));
       io.unobserve(el);
     });
-  }, { threshold: .12, rootMargin: '0px 0px -8% 0px' });
+  // threshold 0: tall blocks (facts table, dashboard) start revealing as soon as their top enters,
+  // so the visitor never scrolls through an empty area waiting for 12% of a 1200px block.
+  }, { threshold: 0, rootMargin: '0px 0px -6% 0px' });
   $$('.reveal').filter(el => !el.closest('.hero')).forEach(el => io.observe(el));
 
   function countUp(el) {
@@ -96,7 +109,24 @@
 
   /* ---------- Pause decorative CSS loops while off-screen ---------- */
   const pauser = new IntersectionObserver(entries => entries.forEach(e => e.target.classList.toggle('paused', !e.isIntersecting)), { rootMargin: '100px' });
-  $$('.marquee, .about-visual, .map-wrap, .scroll-cue, .live, .credit').forEach(el => pauser.observe(el));
+  $$('.hero, .marquee, .about-visual, .map-wrap, .live, .credit').forEach(el => pauser.observe(el));
+
+  /* ---------- Map: never let the Google Maps iframe trap touch scrolling ---------- */
+  const mapWrap = $('#mapWrap'), mapFrame = $('#mapWrap iframe'), mapShield = $('#mapShield');
+  const loadMap = () => { if (!mapFrame.src) mapFrame.src = mapFrame.dataset.src; };
+  if (coarse) {
+    mapWrap.classList.add('touch');
+    mapShield.addEventListener('click', () => { loadMap(); mapWrap.classList.add('loaded', 'active'); });
+    // Re-arm the shield once the map leaves the screen, so coming back never lands a swipe on it.
+    new IntersectionObserver(entries => {
+      if (!entries[entries.length - 1].isIntersecting) mapWrap.classList.remove('active');
+    }).observe(mapWrap);
+  } else {
+    loadMap(); // desktop: native lazy-loading handles it
+  }
+
+  /* ---------- 3D hero fallback: if WebGL / the CDN fails, don't leave an empty block ---------- */
+  setTimeout(() => { const hv = $('#heroVisual'); if (!hv.classList.contains('on')) hv.classList.add('off'); }, 9000);
 
   /* ---------- Cursor glow + magnetic + tilt (desktop pointer only) ---------- */
   if (fine && !reduced) {
@@ -214,7 +244,7 @@
   for (let i = 0; i < N; i++) { a.push(60 + Math.sin(i / 5) * 12 + Math.random() * 6); b.push(40 + Math.cos(i / 7) * 10 + Math.random() * 6); }
   let offset = 0, last = 0, cw = 0, ch = 0, chartRaf = 0, machineTimer = 0, liveVisible = false;
   function sizeChart() {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const dpr = Math.min(devicePixelRatio || 1, coarse ? 1.5 : 2);
     cw = cv.clientWidth; ch = cv.clientHeight;
     cv.width = Math.round(cw * dpr); cv.height = Math.round(ch * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
@@ -260,14 +290,23 @@
     series(b, '#ec4899', '#f59e0b');
     series(a, '#06b6d4', '#6366f1');
   }
-  const loop = t => { drawFrame(t); chartRaf = requestAnimationFrame(loop); };
+  // Phones: 30 fps cap and no drawing during an active touch scroll (frees the GPU for scrolling).
+  const chartMinFrame = coarse ? 32 : 0;
+  let chartLastDraw = 0;
+  const loop = t => {
+    chartRaf = requestAnimationFrame(loop);
+    if (touchScrolling) { last = 0; return; }
+    if (t - chartLastDraw < chartMinFrame) return;
+    chartLastDraw = t;
+    drawFrame(t);
+  };
   function setLive(on) {
     if (on && !chartRaf && !reduced) { last = 0; chartRaf = requestAnimationFrame(loop); }
     if (on && !machineTimer) { updateMachines(); machineTimer = setInterval(updateMachines, 2200); }
     if (!on) { cancelAnimationFrame(chartRaf); chartRaf = 0; clearInterval(machineTimer); machineTimer = 0; }
   }
   drawFrame(performance.now());
-  new IntersectionObserver(([e]) => { liveVisible = e.isIntersecting; setLive(liveVisible && !document.hidden); }, { rootMargin: '150px' }).observe($('#live'));
+  new IntersectionObserver(entries => { liveVisible = entries[entries.length - 1].isIntersecting; setLive(liveVisible && !document.hidden); }, { rootMargin: '150px' }).observe($('#live'));
   document.addEventListener('visibilitychange', () => setLive(liveVisible && !document.hidden));
 
   measure();
