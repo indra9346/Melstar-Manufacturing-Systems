@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Melstar Manufacturing Systems</title>
+  <meta name="description" content="Melstar Manufacturing Systems Pvt Ltd — precision manufacturing from KIADB Industrial Area, Obadenahalli, Doddaballapura, Karnataka." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2306b6d4'/%3E%3Cstop offset='1' stop-color='%236366f1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M32 4l24 14v28L32 60 8 46V18z'/%3E%3Cpath fill='%23fff' d='M20 42V22l12 10 12-10v20h-5V32l-7 6-7-6v10z'/%3E%3C/svg%3E" />
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    } }
+  </script>
+</head>
+<body>
+  <div class="loader" id="loader">
+    <div class="loader-hex"><span></span></div>
+    <p>Calibrating systems<span class="dots"></span></p>
+  </div>
+
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div class="progress" id="progress"></div>
+
+  <div class="bg-aurora" aria-hidden="true">
+    <i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>
+    <div class="grid-floor"></div>
+  </div>
+
+  <header class="nav" id="nav">
+    <a href="#top" class="brand">
+      <svg viewBox="0 0 64 64" class="brand-mark" aria-hidden="true">
+        <defs><linearGradient id="bm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#06b6d4"/><stop offset="1" stop-color="#6366f1"/></linearGradient></defs>
+        <path fill="url(#bm)" d="M32 4l24 14v28L32 60 8 46V18z"/>
+        <path fill="#fff" d="M20 42V22l12 10 12-10v20h-5V32l-7 6-7-6v10z"/>
+      </svg>
+      <span>Melstar<em>Manufacturing Systems</em></span>
+    </a>
+    <nav class="links" id="links">
+      <a href="#about">About</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#process">Process</a>
+      <a href="#live">Live Floor</a>
+      <a href="#contact" class="btn btn-sm magnetic">Contact</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <canvas id="hero3d" aria-hidden="true"></canvas>
+      <div class="hero-copy">
+        <p class="eyebrow reveal"><span class="pulse"></span> KIADB Industrial Area · Doddaballapura</p>
+        <h1 class="hero-title">
+          <span class="line"><span>Precision</span></span>
+          <span class="line"><span class="grad">engineered.</span></span>
+          <span class="line"><span>Future built.</span></span>
+        </h1>
+        <p class="hero-sub reveal">Melstar Manufacturing Systems turns engineering intent into flawless, repeatable production — with the rigour of precision tooling and the intelligence of connected systems.</p>
+        <div class="hero-cta reveal">
+          <a href="#capabilities" class="btn magnetic">Explore capabilities <span class="arrow">→</span></a>
+          <a href="#contact" class="btn btn-ghost magnetic">Visit the plant</a>
+        </div>
+      </div>
+      <div class="hero-hud reveal">
+        <div class="hud-card glass">
+          <span class="hud-label">Plant status</span>
+          <strong id="heroStatus">—</strong>
+          <span class="hud-meta" id="heroClock">IST --:--:--</span>
+        </div>
+        <div class="hud-card glass">
+          <span class="hud-label">Coordinates</span>
+          <strong>13.27° N · 77.58° E</strong>
+          <span class="hud-meta">Plus code 7HFG+CR</span>
+        </div>
+      </div>
+      <a href="#about" class="scroll-cue" aria-label="Scroll"><span></span></a>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="track">
+        <span>Precision Machining</span><b>✦</b><span>Fabrication</span><b>✦</b><span>Assembly</span><b>✦</b><span>Quality Assurance</span><b>✦</b><span>Automation</span><b>✦</b><span>Custom Engineering</span><b>✦</b>
+        <span>Precision Machining</span><b>✦</b><span>Fabrication</span><b>✦</b><span>Assembly</span><b>✦</b><span>Quality Assurance</span><b>✦</b><span>Automation</span><b>✦</b><span>Custom Engineering</span><b>✦</b>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="section about" id="about">
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="kicker reveal">01 — Who we are</p>
+          <h2 class="reveal">A manufacturing partner built on <span class="grad">systems thinking</span>.</h2>
+          <p class="reveal">From our facility at Plot No. 15, KIADB Industrial Area, Obadenahalli, we bring together skilled people, disciplined processes and modern equipment. Every part we deliver is the output of a system — measured, traceable and designed to repeat.</p>
+          <ul class="pill-list reveal">
+            <li>Process-driven production</li>
+            <li>Traceable quality</li>
+            <li>Engineering collaboration</li>
+            <li>On-time delivery focus</li>
+          </ul>
+        </div>
+        <div class="about-visual reveal">
+          <div class="orbit">
+            <div class="orbit-core glass"><span>M</span></div>
+            <div class="ring r1"><i></i></div>
+            <div class="ring r2"><i></i></div>
+            <div class="ring r3"><i></i></div>
+            <span class="tag t1 glass">Design</span>
+            <span class="tag t2 glass">Build</span>
+            <span class="tag t3 glass">Verify</span>
+          </div>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat glass reveal"><strong data-count="6" data-suffix="">0</strong><span>Core capability lines</span></div>
+        <div class="stat glass reveal"><strong data-count="5" data-suffix="-stage">0</strong><span>Controlled production flow</span></div>
+        <div class="stat glass reveal"><strong data-count="100" data-suffix="%">0</strong><span>Parts traceable to process</span></div>
+        <div class="stat glass reveal"><strong data-count="3" data-suffix="">0</strong><span>Phase KIADB industrial hub</span></div>
+      </div>
+    </section>
+
+    <!-- CAPABILITIES -->
+    <section class="section" id="capabilities">
+      <p class="kicker reveal">02 — Capabilities</p>
+      <h2 class="reveal center">What we <span class="grad">engineer</span></h2>
+      <div class="cards">
+        <article class="card tilt reveal">
+          <div class="card-icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="9"/><path d="M24 4v8M24 36v8M4 24h8M36 24h8M10 10l6 6M32 32l6 6M38 10l-6 6M16 32l-6 6"/></svg></div>
+          <h3>Precision Machining</h3>
+          <p>CNC turning and milling to tight tolerances, from prototype quantities to steady production runs.</p>
+          <span class="card-shine"></span>
+        </article>
+        <article class="card tilt reveal">
+          <div class="card-icon"><svg viewBox="0 0 48 48"><path d="M6 34l18-24 18 24z"/><path d="M14 34v8h20v-8"/></svg></div>
+          <h3>Sheet Metal &amp; Fabrication</h3>
+          <p>Cutting, bending, welding and finishing for enclosures, brackets, frames and structural parts.</p>
+          <span class="card-shine"></span>
+        </article>
+        <article class="card tilt reveal">
+          <div class="card-icon"><svg viewBox="0 0 48 48"><rect x="6" y="14" width="16" height="16" rx="3"/><rect x="26" y="18" width="16" height="16" rx="3"/><path d="M22 22h4M14 30v8M34 34v6"/></svg></div>
+          <h3>Assembly &amp; Integration</h3>
+          <p>Sub-assemblies and complete systems built to documented work instructions and tested before dispatch.</p>
+          <span class="card-shine"></span>
+        </article>
+        <article class="card tilt reveal">
+          <div class="card-icon"><svg viewBox="0 0 48 48"><circle cx="21" cy="21" r="12"/><path d="M30 30l12 12M15 21l4 4 8-8"/></svg></div>
+          <h3>Quality Inspection</h3>
+          <p>In-process and final inspection with calibrated gauges, recorded results and full lot traceability.</p>
+          <span class="card-shine"></span>
+        </article>
+        <article class="card tilt reveal">
+          <div class="card-icon"><svg viewBox="0 0 48 48"><path d="M8 40h32M14 40V24l10-8 10 8v16"/><circle cx="24" cy="28" r="4"/><path d="M24 8v8"/></svg></div>
+          <h3>Automation Systems</h3>
+          <p>Fixtures, jigs and automated stations that raise throughput and remove variation from repetitive work.</p>
+          <span class="card-shine"></span>
+        </article>
+        <article class="card tilt reveal">
+          <div class="card-icon"><svg viewBox="0 0 48 48"><path d="M10 38l8-8M30 10l8 8-16 16-8-8z"/><path d="M26 14l8 8"/></svg></div>
+          <h3>Custom Engineering</h3>
+          <p>Design-for-manufacture reviews and build-to-print support that take your drawing to a production-ready part.</p>
+          <span class="card-shine"></span>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section process" id="process">
+      <p class="kicker reveal">03 — Process</p>
+      <h2 class="reveal center">From drawing to <span class="grad">dispatch</span></h2>
+      <div class="timeline" id="timeline">
+        <svg class="timeline-line" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true">
+          <defs><linearGradient id="tl" x1="0" x2="1"><stop offset="0" stop-color="#06b6d4"/><stop offset=".5" stop-color="#6366f1"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>
+          <path id="tlPath" d="M0 60 C 150 0, 250 120, 400 60 S 650 0, 800 60 S 950 110, 1000 60" />
+        </svg>
+        <div class="steps">
+          <div class="step reveal"><span class="num">01</span><h4>Review</h4><p>Drawings, tolerances and volumes analysed for manufacturability.</p></div>
+          <div class="step reveal"><span class="num">02</span><h4>Prototype</h4><p>First articles produced and validated against specification.</p></div>
+          <div class="step reveal"><span class="num">03</span><h4>Produce</h4><p>Controlled runs with standard work and in-process checks.</p></div>
+          <div class="step reveal"><span class="num">04</span><h4>Inspect</h4><p>Final inspection, documentation and lot traceability.</p></div>
+          <div class="step reveal"><span class="num">05</span><h4>Deliver</h4><p>Protective packing and scheduled dispatch to your line.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE -->
+    <section class="section live" id="live">
+      <p class="kicker reveal">04 — Live floor</p>
+      <h2 class="reveal center">The plant, <span class="grad">in real time</span></h2>
+      <p class="reveal center sub">A live view of our smart-factory vision — the clock and plant status are real; the machine telemetry is a visual simulation.</p>
+      <div class="dash">
+        <div class="panel glass reveal span-2">
+          <div class="panel-head"><span>Line throughput</span><span class="live-dot">LIVE</span></div>
+          <canvas id="chart" height="220"></canvas>
+        </div>
+        <div class="panel glass reveal">
+          <div class="panel-head"><span>Overall efficiency</span></div>
+          <div class="gauge">
+            <svg viewBox="0 0 200 120">
+              <defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#06b6d4"/><stop offset="1" stop-color="#6366f1"/></linearGradient></defs>
+              <path class="g-bg" d="M20 110 A80 80 0 0 1 180 110"/>
+              <path class="g-val" id="gaugeArc" d="M20 110 A80 80 0 0 1 180 110"/>
+            </svg>
+            <strong id="gaugeVal">0%</strong>
+          </div>
+        </div>
+        <div class="panel glass reveal">
+          <div class="panel-head"><span>Local time · IST</span></div>
+          <div class="clock" id="bigClock">--:--:--</div>
+          <div class="status-row"><span class="status-dot" id="statusDot"></span><span id="statusText">—</span></div>
+        </div>
+        <div class="panel glass reveal span-2">
+          <div class="panel-head"><span>Work centres</span></div>
+          <ul class="machines" id="machines"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="contact">
+      <div class="contact-grid">
+        <div>
+          <p class="kicker reveal">05 — Visit us</p>
+          <h2 class="reveal">Let’s build something <span class="grad">precise</span>.</h2>
+          <div class="info glass reveal">
+            <div class="info-row"><span class="ic">⌖</span><div><b>Address</b><p>Plot No. 15, Road No. 3, KIADB Industrial Area Obadenahalli, Phase 3, Doddaballapura, Karnataka 562163</p></div></div>
+            <div class="info-row"><span class="ic">◷</span><div><b>Hours</b><p>Closes 5:00 PM · see live status above</p></div></div>
+            <div class="info-row"><span class="ic">✣</span><div><b>Plus code</b><p>7HFG+CR Doddaballapura</p></div></div>
+          </div>
+          <a class="btn magnetic reveal" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Melstar+Manufacturing+Systems+Pvt+Ltd+Doddaballapura">Get directions <span class="arrow">→</span></a>
+        </div>
+        <div class="map-wrap glass reveal">
+          <iframe title="Melstar location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Melstar+Manufacturing+Systems+Pvt+Ltd,+KIADB+Industrial+Area+Obadenahalli,+Doddaballapura&output=embed"></iframe>
+          <div class="map-scan"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="foot-inner">
+      <span>© <span id="year"></span> Melstar Manufacturing Systems Pvt Ltd</span>
+      <span class="kn">ಮೇಲ್ಸ್ಟರ್ ಮ್ಯಾನುಫ್ಯಾಕ್ಚರಿಂಗ್ ಸಿಸ್ಟಮ್ಸ್ ಪಿವಿಟಿ ಎಲ್‌ಟಿಡಿ</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script type="module" src="hero3d.js"></script>
+</body>
+</html>
